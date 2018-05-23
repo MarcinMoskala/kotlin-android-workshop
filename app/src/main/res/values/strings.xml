@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">UniversityAnnouncementsBoard</string>
+    <string name="main_activity_label">Announcements</string>
+</resources>
