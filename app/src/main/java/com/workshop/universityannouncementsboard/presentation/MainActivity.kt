@@ -2,19 +2,19 @@ package com.workshop.universityannouncementsboard.presentation
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import com.workshop.universityannouncementsboard.R
 import com.workshop.universityannouncementsboard.model.Announcement
 import com.workshop.universityannouncementsboard.repositiories.AnnouncementsRepositoryImpl
 import com.workshop.universityannouncementsboard.repositiories.StudentsRepositoryImpl
+import com.workshop.universityannouncementsboard.util.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity(), MainView {
 
-    // TODO: Write property delegate that will bind it to visibility of R.id.progressView
-    // override var loading: Boolean by bindToVisibility(R.id.progressView)
-    override var loading: Boolean = false
-    // TODO: Write property delegate that will bind it to swipe refresh on R.id.swipeRefreshView
-    // override var swipeRefresh: Boolean by bindToSwipeRefresh(R.id.swipeRefreshView)
-    override var swipeRefresh: Boolean = false
+    override var loading: Boolean by bindToVisibility(R.id.progressView)
+    override var swipeRefresh: Boolean by bindToSwipeRefresh(R.id.swipeRefreshView)
 
     private val studentsRepository by lazy { StudentsRepositoryImpl() }
     private val announcementsRepository by lazy { AnnouncementsRepositoryImpl(studentsRepository) }
@@ -23,14 +23,31 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // TODO
+        listView.layoutManager = LinearLayoutManager(this)
+        swipeRefreshView.setOnRefreshListener {
+            thread {
+                presenter.onRefresh()
+            }
+        }
+        thread {
+            presenter.onCreate()
+        }
     }
 
     override fun showAnnouncements(announcements: List<Announcement>) {
-        // TODO
+        uiThread {
+            val titleItem = TitleItemAdapter("Announcements")
+            val announcementsItems = announcements.map(::AnnouncementItemAdapter)
+            listView.adapter = AnnouncementsListAdapter(listOf(titleItem) + announcementsItems)
+        }
     }
 
     override fun showError(error: Throwable) {
-        // TODO
+        uiThread {
+            if (listView.adapter == null) {
+                listView.adapter = AnnouncementsListAdapter(listOf(TitleItemAdapter("Keep refreshing")))
+            }
+            toast(error.message ?: "Unknown error")
+        }
     }
 }

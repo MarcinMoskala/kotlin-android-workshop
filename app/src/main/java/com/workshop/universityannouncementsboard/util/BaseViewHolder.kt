@@ -2,6 +2,8 @@ package com.workshop.universityannouncementsboard.util
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import kotlinx.android.extensions.LayoutContainer
 
-// TODO. Hint: Use LayoutContainer from KAE, https://stackoverflow.com/a/45961003
-class BaseViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+class BaseViewHolder(
+        override val containerView: View
+) : RecyclerView.ViewHolder(containerView), LayoutContainer

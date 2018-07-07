@@ -19,10 +19,18 @@ class AnnouncementsRepositoryImpl(val studentsRepository: StudentsRepository) : 
         return Success(announcements)
     }
 
-    // TODO: Should return passing students list. See PassingStudentsListTest
-    fun makePassingStudentsListText(): String = "" // Get students suing studentsRepository.getStudents()
+    fun makePassingStudentsListText(): String = studentsRepository
+            .getStudents()
+            .filter { it.pointsInSemester > 15 && it.result >= 50 }
+            .sortedWith(compareBy({ it.surname }, { it.name }))
+            .joinToString(separator = "\n") { "${it.name} ${it.surname}, ${it.result}" }
 
+    fun makeBestStudentsList(): String = studentsRepository.getStudents()
+            .filter { it.pointsInSemester >= 30 && it.result >= 80 }
+            .sortedByDescending { it.result }
+            .zip(internships)
+            .sortedWith(compareBy({ it.first.surname }, { it.first.name }))
+            .joinToString(separator = "\n") { (s, i) -> "${s.name} ${s.surname}, $i\$" }
 
-    // TODO: Should return students for internship. See BestStudentsListTest
-    fun makeBestStudentsList(): String = "" // Get students suing studentsRepository.getStudents()
+    private val internships = List(1) { 5000 } + List(3) { 3000 } + List(6) { 1000 }
 }
