@@ -7,6 +7,7 @@ import com.workshop.universityannouncementsboard.model.Announcement
 import com.workshop.universityannouncementsboard.repositiories.AnnouncementsRepositoryImpl
 import com.workshop.universityannouncementsboard.repositiories.StudentsRepositoryImpl
 import com.workshop.universityannouncementsboard.util.toast
+import com.workshop.universityannouncementsboard.util.uiThread
 
 class MainActivity : AppCompatActivity(), MainView {
 
@@ -26,7 +27,9 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun showAnnouncements(announcements: List<Announcement>) {
-        // TODO
+        uiThread {
+            // TODO
+        }
     }
 
     override fun showError(error: Throwable) {
