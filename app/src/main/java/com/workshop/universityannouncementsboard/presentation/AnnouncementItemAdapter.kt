@@ -8,9 +8,11 @@ class AnnouncementItemAdapter(
         private val announcement: Announcement
 ) : ItemAdapter(R.layout.item_announcement) {
 
-// TODO: I make it possible to set it this way (use experimental KAE feature)
-//    override fun BaseViewHolder.onBindViewHolder() {
-//        titleView.text = announcement.title
-//        textView.text = announcement.text
-//    }
+    // TODO: Uncomment this and make it work
+    // Hint: Use LayoutContainer from KAE, https://stackoverflow.com/a/45961003
+    // override fun BaseViewHolder.onBindViewHolder() {
+    //     titleView.text = announcement.title ?: ""
+    //     textView.text = announcement.text
+    //     if(announcement.title == null) titleView.hide()
+    // }
 }

@@ -1,6 +1,6 @@
 package com.workshop.universityannouncementsboard.model
 
-class Announcement(
-        val title: CharSequence,
+data class Announcement(
+        val title: String?,
         val text: String
 )

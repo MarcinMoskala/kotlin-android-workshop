@@ -1,3 +1,3 @@
 package com.workshop.universityannouncementsboard.util
 
-// TODO
+// TODO Implement bindToVisibility and bindToSwipeRefresh here

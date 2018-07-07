@@ -19,8 +19,8 @@ class BestStudentsListTest {
         val text = annRepo.makeBestStudentsList()
 
         // Then
-        val expexted = "Marc Smith, 5000\$"
-        assertEquals(expexted, text)
+        val expected = "Marc Smith, 5000\$"
+        assertEquals(expected, text)
     }
 
     @Test
