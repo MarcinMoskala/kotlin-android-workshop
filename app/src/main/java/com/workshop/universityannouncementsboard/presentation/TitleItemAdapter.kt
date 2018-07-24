@@ -3,7 +3,7 @@ package com.workshop.universityannouncementsboard.presentation
 import com.workshop.universityannouncementsboard.R
 import com.workshop.universityannouncementsboard.util.ItemAdapter
 
-class TitleItemAdapter(
+data class TitleItemAdapter(
         private val title: String
 ) : ItemAdapter(R.layout.item_title) {
 

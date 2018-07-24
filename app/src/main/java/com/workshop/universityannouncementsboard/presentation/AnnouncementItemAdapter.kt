@@ -4,7 +4,7 @@ import com.workshop.universityannouncementsboard.R
 import com.workshop.universityannouncementsboard.model.Announcement
 import com.workshop.universityannouncementsboard.util.ItemAdapter
 
-class AnnouncementItemAdapter(
+data class AnnouncementItemAdapter(
         private val announcement: Announcement
 ) : ItemAdapter(R.layout.item_announcement) {
 

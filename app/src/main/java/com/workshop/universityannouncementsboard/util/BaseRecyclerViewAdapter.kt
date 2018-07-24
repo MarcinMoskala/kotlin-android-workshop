@@ -5,7 +5,7 @@ import android.view.ViewGroup
 
 // TODO
 open class BaseRecyclerViewAdapter(
-        items: List<ItemAdapter>
+        val items: List<ItemAdapter>
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     final override fun getItemCount() = 0
