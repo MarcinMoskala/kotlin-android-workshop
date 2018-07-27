@@ -44,18 +44,41 @@ class MainActivityTest {
     }
 
     @Test
-    fun `onCreate sets linear layout manager of listView, then it sets swipe refresh of swipeRefreshView, and finally it calls presenters onCreate method`() {
+    fun `onCreate sets linear layout manager of listView`() {
+        activity.onActivityCreated()
+        verify {
+            listViewMock.layoutManager = any()
+        }
+    }
+
+    @Test
+    fun `onCreate sets swipe refresh of swipeRefreshView`() {
         activity.onActivityCreated()
         val swipeRefreshListenerSlot = slot<SwipeRefreshLayout.OnRefreshListener>()
-        verify(Ordering.ALL) {
-            listViewMock.layoutManager = any()
+        verify {
             swipeRefreshViewMock.setOnRefreshListener(capture(swipeRefreshListenerSlot))
-            anyConstructed<MainPresenter>().onCreate()
         }
 
         swipeRefreshListenerSlot.captured.onRefresh()
         verify {
             anyConstructed<MainPresenter>().onRefresh()
+        }
+    }
+
+    @Test
+    fun `onCreate calls presenter onCreate method`() {
+        activity.onActivityCreated()
+        verify {
+            anyConstructed<MainPresenter>().onCreate()
+        }
+    }
+
+    @Test
+    fun `onCreate sets layout manager before it calls presenter onCreate method`() {
+        activity.onActivityCreated()
+        verify(Ordering.ORDERED) {
+            listViewMock.layoutManager = any()
+            anyConstructed<MainPresenter>().onCreate()
         }
     }
 
