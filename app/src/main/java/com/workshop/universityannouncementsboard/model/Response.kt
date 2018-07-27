@@ -5,9 +5,9 @@ class Success<R, E>(val value: R) : Response<R, E>()
 class ErrorResponse<R, E>(val error: E) : Response<R, E>()
 
 /* TODO:
-   I would like to use it this way:
+Change above declaration to let me use it this way:
 
-fun main(args: Array<String>) {
+fun usage() {
     val rs1 = Success(1)
     val re1 = ErrorResponse(Error())
     val re2 = ErrorResponse("Error")
@@ -35,4 +35,4 @@ fun main(args: Array<String>) {
     val e1: ErrorResponse<Throwable> = e
     val e2: ErrorResponse<Any> = e
 }
- */
+*/

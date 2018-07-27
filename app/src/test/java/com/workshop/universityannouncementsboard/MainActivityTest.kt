@@ -47,7 +47,7 @@ class MainActivityTest {
     fun `onCreate sets linear layout manager of listView, then it sets swipe refresh of swipeRefreshView, and finally it calls presenters onCreate method`() {
         activity.onActivityCreated()
         val swipeRefreshListenerSlot = slot<SwipeRefreshLayout.OnRefreshListener>()
-        verify {
+        verify(Ordering.ALL) {
             listViewMock.layoutManager = any()
             swipeRefreshViewMock.setOnRefreshListener(capture(swipeRefreshListenerSlot))
             anyConstructed<MainPresenter>().onCreate()

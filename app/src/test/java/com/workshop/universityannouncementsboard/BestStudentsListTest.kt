@@ -1,5 +1,6 @@
 package com.workshop.universityannouncementsboard
 
+import com.workshop.universityannouncementsboard.model.Student
 import com.workshop.universityannouncementsboard.repositiories.AnnouncementsRepositoryImpl
 import com.workshop.universityannouncementsboard.repositiories.StudentsRepository
 import io.mockk.every
@@ -19,7 +20,7 @@ class BestStudentsListTest {
         val text = annRepo.makeBestStudentsList()
 
         // Then
-        val expected = "Marc Smith, 5000\$"
+        val expected = "Marc Smith, \$5000"
         assertEquals(expected, text)
     }
 
@@ -34,6 +35,34 @@ class BestStudentsListTest {
 
         // Then
         assertEquals("", text)
+    }
+
+    @Test
+    fun `Result 80 is acceptable`() {
+        val student = Student("Noely", "Peterson", 80.0, 32)
+        val repo: StudentsRepository = mockk()
+        every { repo.getStudents() } returns listOf(student)
+        val annRepo = AnnouncementsRepositoryImpl(repo)
+
+        // When
+        val text = annRepo.makeBestStudentsList()
+
+        // Then
+        assertEquals("Noely Peterson, \$5000", text)
+    }
+
+    @Test
+    fun `30 points is acceptable`() {
+        val student = Student("Noely", "Peterson", 81.0, 30)
+        val repo: StudentsRepository = mockk()
+        every { repo.getStudents() } returns listOf(student)
+        val annRepo = AnnouncementsRepositoryImpl(repo)
+
+        // When
+        val text = annRepo.makeBestStudentsList()
+
+        // Then
+        assertEquals("Noely Peterson, \$5000", text)
     }
 
     @Test
@@ -60,16 +89,16 @@ class BestStudentsListTest {
 
         // Then
         val expected = """
-            Ester Adams, 1000${'$'}
-            Dior Angel, 3000${'$'}
-            Oregon Dart, 1000${'$'}
-            Jack Johnson, 1000${'$'}
-            James Johnson, 1000${'$'}
-            Jon Johnson, 1000${'$'}
-            Naja Marcson, 5000${'$'}
-            Alex Nolan, 1000${'$'}
-            Ron Peters, 3000${'$'}
-            Marc Smith, 3000${'$'}
+            Ester Adams, ${'$'}1000
+            Dior Angel, ${'$'}3000
+            Oregon Dart, ${'$'}1000
+            Jack Johnson, ${'$'}1000
+            James Johnson, ${'$'}1000
+            Jon Johnson, ${'$'}1000
+            Naja Marcson, ${'$'}5000
+            Alex Nolan, ${'$'}1000
+            Ron Peters, ${'$'}3000
+            Marc Smith, ${'$'}3000
         """.trimIndent()
         assertEquals(expected, text)
     }
