@@ -1,4 +1,4 @@
-package basics
+package com.workshop.universityannouncementsboard.extra
 
 // TODO: Clean it up
 abstract class Tree {
