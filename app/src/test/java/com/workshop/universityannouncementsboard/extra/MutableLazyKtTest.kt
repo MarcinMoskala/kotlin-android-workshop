@@ -25,6 +25,16 @@ class MutableLazyKtTest {
         assert(time in 450..550)
     }
 
+    @Test
+    fun `MutableLazy should accept nullable values`() {
+        val lazy by mutableLazy<String?> { null }
+        assertNull(lazy)
+
+        var lazy2 by mutableLazy<String?> { "A" }
+        lazy2 = null
+        assertNull(lazy2)
+    }
+
     private class Game()
 
     private fun readGameFromSave(): Game? {
