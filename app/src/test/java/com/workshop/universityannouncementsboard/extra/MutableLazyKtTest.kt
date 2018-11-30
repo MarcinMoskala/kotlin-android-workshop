@@ -7,7 +7,7 @@ import kotlin.system.*
 class MutableLazyKtTest {
 
     @Test
-    fun `I don't have to wait if I changed value first`() {
+    fun `Do not initialize if initialized`() {
         val time = measureTimeMillis {
             var game: Game? by mutableLazy { readGameFromSave() }
             game = Game()
@@ -17,9 +17,20 @@ class MutableLazyKtTest {
     }
 
     @Test
-    fun `I have to wait if I changed value first`() {
+    fun `Initializes if not initialized`() {
         val time = measureTimeMillis {
             val game: Game? by mutableLazy { readGameFromSave() }
+            print(game)
+        }
+        assert(time in 450..550)
+    }
+
+    @Test
+    fun `Do not initialize again if already initialized`() {
+        val time = measureTimeMillis {
+            val game: Game? by mutableLazy { readGameFromSave() }
+            print(game)
+            print(game)
             print(game)
         }
         assert(time in 450..550)
