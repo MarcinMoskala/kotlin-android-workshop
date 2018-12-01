@@ -15,9 +15,11 @@ private fun treeToString(tree: Tree, sb: StringBuilder): StringBuilder {
         sb.append(leaf.value)
     } else if(tree is Node) {
         val node = tree as Node
+        sb.append("(")
         treeToString(node.left, sb)
         sb.append(", ")
         treeToString(node.right, sb)
+        sb.append(")")
     }
     return sb
 }
