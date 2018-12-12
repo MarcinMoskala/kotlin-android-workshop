@@ -83,6 +83,14 @@ class MainActivityTest {
     }
 
     @Test
+    fun `showAnnouncements sets any list adapter`() {
+        activity.showAnnouncements(listOf())
+        verify {
+            listViewMock.adapter = any()
+        }
+    }
+
+    @Test
     fun `showAnnouncements sets list adapter with just a title for no announcements`() {
         activity.showAnnouncements(listOf())
         val slot = slot<AnnouncementsListAdapter>()
