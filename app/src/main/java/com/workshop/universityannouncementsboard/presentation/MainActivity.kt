@@ -12,13 +12,9 @@ import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity(), MainView {
 
-    // TODO: Write property delegate that will bind it to visibility of R.id.progressView. Usage should look this way
-    // override var loading: Boolean by bindToVisibility(R.id.progressView)
     override var loading: Boolean by Delegates.observable(false) { _, _, newValue ->
-        progressView.visibility = if(newValue) View.VISIBLE else View.GONE
+        progressView.visibility = if (newValue) View.VISIBLE else View.GONE
     }
-    // TODO: Write property delegate that will bind it to swipe refresh on R.id.swipeRefreshView. Usage should look this way
-    // override var swipeRefresh: Boolean by bindToSwipeRefresh(R.id.swipeRefreshView)
     override var swipeRefresh: Boolean by Delegates.observable(false) { _, _, newValue ->
         swipeRefreshView.isRefreshing = newValue
     }
