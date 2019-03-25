@@ -5,15 +5,26 @@ package com.workshop.universityannouncementsboard.extra
 // “Fizz” if number is divisible by 3
 // “Buzz” if number is divisible by 5
 // “FizzBuzz” if number is divisible both by 3 and 5 (by 15)
-fun fizzBuzz(): String {
+// Print elements using `console.println`
+fun fizzBuzz(console: Console) {
     TODO()
+}
+
+class Console {
+    fun println(a: Any?) {
+        kotlin.io.println(a)
+    }
+}
+
+fun printlnWrap(any: Any?) {
+    print(any)
 }
 
 // Fibonacci number that starts from 1 and 1 (fib(0) == 1, fib(1) == 1, fib(2) == 2, fib(3) == 3, fib(4) == 5, fib(5) == 8)
 // https://en.wikipedia.org/wiki/Fibonacci_number
 fun fib(n: Int): Int = TODO()
 
-fun main(args: Array<String>) {
+fun main() {
     println("Hello, world")
 
     // TODO: I want User which can be used as follows:

@@ -4,7 +4,7 @@ import org.junit.*
 import org.junit.Assert.*
 import kotlin.system.*
 
-class MutableLazyKtTest {
+class MutableLazyTests {
 
     @Test
     fun `Do not initialize if initialized`() {
