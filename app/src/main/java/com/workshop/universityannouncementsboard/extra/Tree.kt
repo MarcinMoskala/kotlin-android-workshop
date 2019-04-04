@@ -1,25 +1,12 @@
 package com.workshop.universityannouncementsboard.extra
 
 // TODO: Clean it up
-abstract class Tree {
-    override fun toString(): String {
-        return treeToString(this, StringBuilder()).toString()
+sealed class Tree {
+    override fun toString(): String = when (this) {
+        is Leaf -> value
+        is Node -> "($left, $right)"
     }
 }
-class Leaf(val value: String): Tree()
-class Node(val left: Tree, val right: Tree): Tree()
 
-private fun treeToString(tree: Tree, sb: StringBuilder): StringBuilder {
-    if(tree is Leaf) {
-        val leaf = tree as Leaf
-        sb.append(leaf.value)
-    } else if(tree is Node) {
-        val node = tree as Node
-        sb.append("(")
-        treeToString(node.left, sb)
-        sb.append(", ")
-        treeToString(node.right, sb)
-        sb.append(")")
-    }
-    return sb
-}
+class Leaf(val value: String) : Tree()
+class Node(val left: Tree, val right: Tree) : Tree()

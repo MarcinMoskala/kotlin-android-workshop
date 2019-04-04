@@ -17,12 +17,21 @@ class MainPresenter(
 ) {
 
     fun onCreate() {
-        // TODO: Remove that and implement business logic instead
-        view.showAnnouncements(listOf(Announcement("Test announcement", "Hey, this is an announcement!")))
+        view.loading = true
+        loadData()
+        view.loading = false
     }
 
     fun onRefresh() {
-        // TODO: Remove that and implement business logic instead
-        view.showError(Error("Error"))
+        view.swipeRefresh = true
+        loadData()
+        view.swipeRefresh = false
+    }
+
+    private fun loadData() {
+        when (val resp = announcementsRepository.getAnnouncements()) {
+            is Success -> view.showAnnouncements(resp.value)
+            is ErrorResponse -> view.showError(resp.error)
+        }
     }
 }

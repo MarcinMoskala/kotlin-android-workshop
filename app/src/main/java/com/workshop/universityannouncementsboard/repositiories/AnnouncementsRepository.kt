@@ -1,9 +1,8 @@
 package com.workshop.universityannouncementsboard.repositiories
 
-import com.workshop.universityannouncementsboard.model.Announcement
-import com.workshop.universityannouncementsboard.model.Response
+import com.workshop.universityannouncementsboard.model.*
 
 interface AnnouncementsRepository {
 
-    fun getAnnouncements(): Response<List<Announcement>, Throwable>
+    fun getAnnouncements(callback: (Response<List<Announcement>, Throwable>) -> Unit)
 }

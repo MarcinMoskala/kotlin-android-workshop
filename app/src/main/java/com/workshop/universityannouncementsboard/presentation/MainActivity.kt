@@ -1,13 +1,18 @@
 package com.workshop.universityannouncementsboard.presentation
 
+import android.content.*
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.*
 import android.view.View
+import android.widget.*
 import com.workshop.universityannouncementsboard.R
 import com.workshop.universityannouncementsboard.model.Announcement
 import com.workshop.universityannouncementsboard.repositiories.AnnouncementsRepositoryImpl
 import com.workshop.universityannouncementsboard.repositiories.StudentsRepositoryImpl
+import com.workshop.universityannouncementsboard.util.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity(), MainView {
@@ -34,14 +39,25 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     fun onActivityCreated() {
-        // TODO
+        listView.layoutManager = LinearLayoutManager(this)
+        swipeRefreshView.setOnRefreshListener {
+            presenter.onRefresh()
+        }
+        presenter.onCreate()
     }
 
     override fun showAnnouncements(announcements: List<Announcement>) {
-        // TODO
+        val titleItem = listOf(TitleItemAdapter("Announcements"))
+        val announcementsItems = announcements.map { AnnouncementItemAdapter(it) }
+        listView.adapter = AnnouncementsListAdapter(titleItem + announcementsItems)
     }
 
     override fun showError(error: Throwable) {
-        // TODO
+        if(listView.adapter == null) {
+            val items = listOf(TitleItemAdapter("Keep refreshing"))
+            listView.adapter = AnnouncementsListAdapter(items)
+        }
+        val message = error.message ?: "Unknown error"
+        toast(message)
     }
 }

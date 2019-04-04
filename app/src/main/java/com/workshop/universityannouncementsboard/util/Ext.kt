@@ -5,9 +5,9 @@ import android.view.View
 import android.widget.Toast
 
 fun Context.toast(message: String, duration: Int = Toast.LENGTH_LONG) {
-    // TODO
+    Toast.makeText(this, message, duration).show()
 }
 
 fun View.hide() {
-    // TODO
+    this.visibility = View.GONE
 }
