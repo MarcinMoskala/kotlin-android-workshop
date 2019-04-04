@@ -5,6 +5,7 @@ import com.workshop.universityannouncementsboard.model.Announcement
 import com.workshop.universityannouncementsboard.model.ErrorResponse
 import com.workshop.universityannouncementsboard.model.Response
 import com.workshop.universityannouncementsboard.model.Success
+import com.workshop.universityannouncementsboard.util.*
 import java.util.*
 import kotlin.concurrent.*
 
@@ -13,15 +14,16 @@ class AnnouncementsRepositoryImpl(val studentsRepository: StudentsRepository) : 
     override fun getAnnouncements(callback: (Response<List<Announcement>, Throwable>)->Unit) {
         thread {
             Thread.sleep(2000) // Nobody trust university system that works too fast
-            if (Random().nextBoolean()) {
-                callback(ErrorResponse(Error("Random error"))) // Nobody trust university system that is fully reliable
+            val ret: Response<List<Announcement>, Throwable> = if (Random().nextBoolean()) {
+                ErrorResponse(Error("Random error")) // Nobody trust university system that is fully reliable
             } else {
                 val announcements = AnnouncementsList.getAnnouncements(
                     passingStudentsListText = makePassingStudentsListText(),
                     bestStudentsListText = makePassingStudentsListText()
                 )
-                callback(Success(announcements))
+                Success(announcements)
             }
+            uiThread { callback(ret) }
         }
     }
 
