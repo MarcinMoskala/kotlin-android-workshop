@@ -18,20 +18,25 @@ class MainPresenter(
 
     fun onCreate() {
         view.loading = true
-        loadData()
-        view.loading = false
+        loadData {
+            view.loading = false
+        }
     }
 
     fun onRefresh() {
         view.swipeRefresh = true
-        loadData()
-        view.swipeRefresh = false
+        loadData {
+            view.swipeRefresh = false
+        }
     }
 
-    private fun loadData() {
-        when (val resp = announcementsRepository.getAnnouncements()) {
-            is Success -> view.showAnnouncements(resp.value)
-            is ErrorResponse -> view.showError(resp.error)
+    private fun loadData(callback: ()->Unit) {
+        announcementsRepository.getAnnouncements { resp ->
+            when (resp) {
+                is Success -> view.showAnnouncements(resp.value)
+                is ErrorResponse -> view.showError(resp.error)
+            }
+            callback()
         }
     }
 }

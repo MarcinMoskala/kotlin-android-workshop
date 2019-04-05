@@ -27,7 +27,7 @@ class MainPresenterTest {
 
         // Then
         val capturingSlot = slot<List<Announcement>>()
-        verifySequence {
+        verify(Ordering.SEQUENCE) {
             view.loading = true
             view.showAnnouncements(capture(capturingSlot))
             view.loading = false

@@ -1,32 +1,18 @@
 package com.workshop.universityannouncementsboard.presentation
 
-import android.content.*
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.os.*
+import android.support.v7.app.*
 import android.support.v7.widget.*
-import android.view.View
-import android.widget.*
-import com.workshop.universityannouncementsboard.R
-import com.workshop.universityannouncementsboard.model.Announcement
-import com.workshop.universityannouncementsboard.repositiories.AnnouncementsRepositoryImpl
-import com.workshop.universityannouncementsboard.repositiories.StudentsRepositoryImpl
+import com.workshop.universityannouncementsboard.*
+import com.workshop.universityannouncementsboard.model.*
+import com.workshop.universityannouncementsboard.repositiories.*
 import com.workshop.universityannouncementsboard.util.*
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
-import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity(), MainView {
 
-    // TODO: Write property delegate that will bind it to visibility of R.id.progressView. Usage should look this way
-    // override var loading: Boolean by bindToVisibility(R.id.progressView)
-    override var loading: Boolean by Delegates.observable(false) { _, _, newValue ->
-        progressView.visibility = if(newValue) View.VISIBLE else View.GONE
-    }
-    // TODO: Write property delegate that will bind it to swipe refresh on R.id.swipeRefreshView. Usage should look this way
-    // override var swipeRefresh: Boolean by bindToSwipeRefresh(R.id.swipeRefreshView)
-    override var swipeRefresh: Boolean by Delegates.observable(false) { _, _, newValue ->
-        swipeRefreshView.isRefreshing = newValue
-    }
+    override var loading: Boolean by bindToVisibility(R.id.progressView)
+    override var swipeRefresh: Boolean by bindToSwipeRefresh(R.id.swipeRefreshView)
 
     private val studentsRepository by lazy { StudentsRepositoryImpl() }
     private val announcementsRepository by lazy { AnnouncementsRepositoryImpl(studentsRepository) }
@@ -48,12 +34,12 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun showAnnouncements(announcements: List<Announcement>) {
         val titleItem = listOf(TitleItemAdapter("Announcements"))
-        val announcementsItems = announcements.map { AnnouncementItemAdapter(it) }
+        val announcementsItems = announcements.map(::AnnouncementItemAdapter)
         listView.adapter = AnnouncementsListAdapter(titleItem + announcementsItems)
     }
 
     override fun showError(error: Throwable) {
-        if(listView.adapter == null) {
+        if (listView.adapter == null) {
             val items = listOf(TitleItemAdapter("Keep refreshing"))
             listView.adapter = AnnouncementsListAdapter(items)
         }

@@ -4,8 +4,8 @@ import org.junit.Assert.*
 import org.junit.*
 
 // TODO: Uncomment
-//import com.workshop.universityannouncementsboard.extra.flatMap
-//import kotlin.collections.flatMap as stdlibFlatMap
+import com.workshop.universityannouncementsboard.extra.flatMap
+import kotlin.collections.flatMap as stdlibFlatMap
 
 class FlatMapTest {
 

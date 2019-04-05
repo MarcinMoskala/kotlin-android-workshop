@@ -1,17 +1,14 @@
 package com.workshop.universityannouncementsboard.repositiories
 
-import com.workshop.universityannouncementsboard.AnnouncementsList
-import com.workshop.universityannouncementsboard.model.Announcement
-import com.workshop.universityannouncementsboard.model.ErrorResponse
-import com.workshop.universityannouncementsboard.model.Response
-import com.workshop.universityannouncementsboard.model.Success
+import com.workshop.universityannouncementsboard.*
+import com.workshop.universityannouncementsboard.model.*
 import com.workshop.universityannouncementsboard.util.*
 import java.util.*
 import kotlin.concurrent.*
 
 class AnnouncementsRepositoryImpl(val studentsRepository: StudentsRepository) : AnnouncementsRepository {
 
-    override fun getAnnouncements(callback: (Response<List<Announcement>, Throwable>)->Unit) {
+    override fun getAnnouncements(callback: (Response<List<Announcement>, Throwable>) -> Unit) {
         thread {
             Thread.sleep(2000) // Nobody trust university system that works too fast
             val ret: Response<List<Announcement>, Throwable> = if (Random().nextBoolean()) {
@@ -28,9 +25,19 @@ class AnnouncementsRepositoryImpl(val studentsRepository: StudentsRepository) : 
     }
 
     // TODO: Should return passing students list. See PassingStudentsListTest
-    fun makePassingStudentsListText(): String = "" // Get students suing studentsRepository.getStudents()
+    fun makePassingStudentsListText(): String = studentsRepository.getStudents()
+        .filter { it.result >= 50 && it.pointsInSemester > 15 }
+        .sortedWith(compareBy({ it.surname }, { it.name }))
+        .joinToString(separator = "\n") { "${it.name} ${it.surname}, ${it.result}" }
 
+    val rewards = List(1) { 5000 } + List(3) { 3000 } + List(6) { 1000 }
 
-    // TODO: Should return students for internship. See BestStudentsListTest
-    fun makeBestStudentsList(): String = "" // Get students suing studentsRepository.getStudents()
+    fun makeBestStudentsList(): String = studentsRepository.getStudents()
+        .filter { it.result >= 80 && it.pointsInSemester >= 30 }
+        .sortedByDescending { it.result }
+        .zip(rewards)
+        .sortedWith(compareBy({ it.first.surname }, { it.first.surname }))
+        .joinToString(separator = "\n") { (student, reward) ->
+            "${student.name} ${student.surname}, \$$reward"
+        }
 }

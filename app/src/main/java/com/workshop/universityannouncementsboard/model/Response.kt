@@ -1,13 +1,19 @@
 package com.workshop.universityannouncementsboard.model
 
-sealed class Response<R, E>
-class Success<R, E>(val value: R) : Response<R, E>()
-class ErrorResponse<R, E>(val error: E) : Response<R, E>()
+sealed class Response<out R, out E>
+class Success<out R>(val value: R) : Response<R, Nothing>()
+class ErrorResponse<out E>(val error: E) : Response<Nothing, E>()
 
-/* TODO:
-Change above declaration to let me use it this way:
+fun sendSuccess(response: Success<Any?>) {/*...*/}
+fun sendError(response: ErrorResponse<Throwable>) {/*...*/}
+fun sendResponse(response: Response<Any?, Throwable>) {/*...*/}
 
 fun usage() {
+    sendSuccess(Success(1))
+    sendError(ErrorResponse(Error()))
+    sendResponse(Success(1))
+    sendResponse(ErrorResponse(Error()))
+
     val rs1 = Success(1)
     val re1 = ErrorResponse(Error())
     val re2 = ErrorResponse("Error")
@@ -35,4 +41,3 @@ fun usage() {
     val e1: ErrorResponse<Throwable> = e
     val e2: ErrorResponse<Any> = e
 }
-*/
