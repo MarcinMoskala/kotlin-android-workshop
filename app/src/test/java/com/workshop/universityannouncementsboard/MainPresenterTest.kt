@@ -6,10 +6,7 @@ import com.workshop.universityannouncementsboard.model.Success
 import com.workshop.universityannouncementsboard.presentation.MainPresenter
 import com.workshop.universityannouncementsboard.presentation.MainView
 import com.workshop.universityannouncementsboard.repositiories.AnnouncementsRepository
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.slot
-import io.mockk.verifySequence
+import io.mockk.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -30,11 +27,9 @@ class MainPresenterTest {
 
         // Then
         val capturingSlot = slot<List<Announcement>>()
-        verifySequence {
-            view.loading = true
+        verify(ordering = Ordering.ORDERED) {
             repo.getAnnouncements()
             view.showAnnouncements(capture(capturingSlot))
-            view.loading = false
         }
         assertEquals(someAnnouncements, capturingSlot.captured)
     }
@@ -70,11 +65,9 @@ class MainPresenterTest {
 
         // Then
         val capturingSlot = slot<Throwable>()
-        verifySequence {
-            view.loading = true
+        verify(ordering = Ordering.ORDERED) {
             repo.getAnnouncements()
             view.showError(capture(capturingSlot))
-            view.loading = false
         }
         assertEquals(someError, capturingSlot.captured)
     }
