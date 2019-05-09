@@ -8,7 +8,7 @@ class ErrorResponse<R, E>(val error: E) : Response<R, E>()
 Change above declaration to let me use it this way:
 
 fun processResponseInt(response: Response<Int, String>) { /*...*/ }
-fun processResponseString(response: Response<Int, String>) { /*...*/ }
+fun processResponseString(response: Response<String, Throwable>) { /*...*/ }
 
 fun usage() {
     processResponseInt(Success(1))
