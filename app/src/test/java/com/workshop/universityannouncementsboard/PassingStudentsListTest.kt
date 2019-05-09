@@ -20,8 +20,8 @@ class PassingStudentsListTest {
         val text = annRepo.makePassingStudentsListText()
 
         // Then
-        val expexted = "Marc Smith, 87.0"
-        assertEquals(expexted, text)
+        val expected = "Marc Smith, 87.0"
+        assertEquals(expected, text)
     }
 
     @Test
@@ -38,7 +38,7 @@ class PassingStudentsListTest {
     }
 
     @Test
-    fun `15 points is not acceptable`() {
+    fun `Student needs more then 15 points be be accepted`() {
         val student = Student("Noely", "Peterson", 81.0, 15)
         val repo: StudentsRepository = mockk()
         every { repo.getStudents() } returns listOf(student)
@@ -49,6 +49,31 @@ class PassingStudentsListTest {
 
         // Then
         assertEquals("", text)
+    }
+
+    @Test
+    fun `Students are displayed in an alphanumerical order sorted by surname and then by name`() {
+        val students = listOf(
+            Student(name = "B", surname = "A", result = 81.0, pointsInSemester = 16),
+            Student(name = "B", surname = "B", result = 82.0, pointsInSemester = 16),
+            Student(name = "A", surname = "A", result = 83.0, pointsInSemester = 16),
+            Student(name = "A", surname = "B", result = 84.0, pointsInSemester = 16)
+        )
+        val repo: StudentsRepository = mockk()
+        every { repo.getStudents() } returns students
+        val annRepo = AnnouncementsRepositoryImpl(repo)
+
+        // When
+        val text = annRepo.makePassingStudentsListText()
+
+        // Then
+        val expected = """
+            A A, 83.0
+            B A, 81.0
+            A B, 84.0
+            B B, 82.0
+        """.trimIndent()
+        assertEquals(expected, text)
     }
 
     @Test
