@@ -21,7 +21,7 @@ class AnnouncementsRepositoryImpl(val studentsRepository: StudentsRepository) : 
      * at least 50, in alphabetical order (surname then name), in the format: “{name} {surname}, {result}”
      */
     // TODO: Should return passing students list. See PassingStudentsListTest
-    fun makePassingStudentsListText(): String = "" // Get students suing studentsRepository.getStudents()
+    fun makePassingStudentsListText(): String = "" // Get students using studentsRepository.getStudents()
 
     /*
      * Displays the best 10 students so they can get an internship. Comparing students by result
@@ -31,5 +31,5 @@ class AnnouncementsRepositoryImpl(val studentsRepository: StudentsRepository) : 
      * then name) in the format “{name} {surname}, ${internship size}”
      */
     // TODO: Should return students for internship. See BestStudentsListTest
-    fun makeBestStudentsList(): String = "" // Get students suing studentsRepository.getStudents()
+    fun makeBestStudentsList(): String = "" // Get students using studentsRepository.getStudents()
 }
