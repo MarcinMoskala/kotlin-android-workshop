@@ -2,18 +2,29 @@ package com.workshop.universityannouncementsboard.repositiories
 
 import com.workshop.universityannouncementsboard.*
 import com.workshop.universityannouncementsboard.model.*
+import com.workshop.universityannouncementsboard.util.*
+import kotlin.concurrent.*
 import kotlin.random.*
 
 class AnnouncementsRepositoryImpl(val studentsRepository: StudentsRepository) : AnnouncementsRepository {
 
-    override fun getAnnouncements(): Response<List<Announcement>, Throwable> {
-        Thread.sleep(2000) // Nobody trust university system that works too fast
-        if (Random.nextBoolean()) return ErrorResponse(Error("Random error")) // Nobody trust university system that is fully reliable
-        val announcements = AnnouncementsList.getAnnouncements(
-            passingStudentsListText = makePassingStudentsListText(),
-            bestStudentsListText = makePassingStudentsListText()
-        )
-        return Success(announcements)
+    override fun getAnnouncements(callback: (Response<List<Announcement>, Throwable>)->Unit) {
+        thread {
+            Thread.sleep(2000) // Nobody trust university system that works too fast
+            if (Random.nextBoolean()) {
+                uiThread {
+                    callback(ErrorResponse(Error("Random error"))) // Nobody trust university system that is fully reliable
+                }
+            } else {
+                val announcements = AnnouncementsList.getAnnouncements(
+                    passingStudentsListText = makePassingStudentsListText(),
+                    bestStudentsListText = makePassingStudentsListText()
+                )
+                uiThread {
+                    callback(Success(announcements))
+                }
+            }
+        }
     }
 
     /*
