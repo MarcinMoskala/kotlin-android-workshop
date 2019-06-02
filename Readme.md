@@ -1,29 +1,30 @@
 
-# Kotlin workshop
+# Kotlin in Android workshop
 
-This project containes exercises and examples for [Kt. Academy Kotlin workshop](https://kt.academy/Kotlin_in_Backend).
+This project containes exercises and examples for [Kt. Academy Kotlin workshop](https://kt.academy/Kotlin_in_Android).
 
 Workshop coveres:
-* Basic Kotlin structures
-* Functions on different levels and functional style
-* Kotlin OO programming
-* Data classes
-* Sealed classes
-* Object expression, object declaration and companion object
-* Kotlin type system
-* Extension functions
-* Functional programming in Kotlin
-* Collections and string processing
-* Scope functions (let, apply, run, also, with, takeIf, takeUnless)
-* Generic classes and functions, making own collection processing function
-* Kotlin generic type parameter declarations and modifiers
-* Kotlin property and interface delegates
-* Reflection in Kotlin, and how to use Java reflection in Kotlin
-* DSL usage and creation
-* Interoperability between Kotlin and Java
-* Basics of Kotlin coroutines
-* Rules of idiomatic Kotlin
-* Kotlin style guides
+* Variety of Kotlin structures
+* How to use functions at different levels
+* How classes changed in Kotlin and how it influences Android development
+* What are object expression and object declaration
+* Functional programming features in Kotlin
+* How to use Kotlin Android Extensions and KTX
+* What exactly are Data classes
+* How to use Sealed classes
+* You will understand deeply Kotlin type system
+* How to define and use Extension functions
+* How improve compiler suggestions using Kotlin Contracts
+* How to do expressive and efficient collection processing in Kotlin
+* What are and how to use Scope functions (let, apply, run, also, with, takeIf, takeUnless)
+* What are generic variance modifiers, how to use them and what are the limitations
+* Why inline classes are useful and important
+* How to create and use Kotlin property and interface delegates
+* How to use and create Kotlin DSL
+* How to write Kotlin code in an idiomatic way
+* What are Kotlin code conventions and guidelines
 
-If you are interested in having this workshop in your company, you can find details [here](https://kt.academy/Kotlin_in_Backend) or just fill [the form](https://marcinmoskala.typeform.com/to/StT0w1).
+All in terms of Android development, and practiced while developing a real-life Android application. 
+
+If you are interested in having this workshop in your company, you can find details [here](https://kt.academy/Kotlin_in_Android) or just fill [the form](https://marcinmoskala.typeform.com/to/MMHtNM).
 
