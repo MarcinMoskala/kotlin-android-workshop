@@ -13,26 +13,16 @@ class AnnouncementsRepositoryImpl(val studentsRepository: StudentsRepository) : 
         if (Random.nextBoolean()) return ErrorResponse(Error("Random error")) // Nobody trust university system that is fully reliable
         val announcements = AnnouncementsList.getAnnouncements(
             passingStudentsListText = makePassingStudentsListText(),
-            bestStudentsListText = makePassingStudentsListText()
+            bestStudentsListText = makeBestStudentsList()
         )
         return Success(announcements)
     }
 
-    override fun getAnnouncements(callback: (Response<List<Announcement>, Throwable>)->Unit) {
+    override fun getAnnouncements(callback: (Response<List<Announcement>, Throwable>) -> Unit) {
         thread {
-            Thread.sleep(2000) // Nobody trust university system that works too fast
-            if (Random.nextBoolean()) {
-                uiThread {
-                    callback(ErrorResponse(Error("Random error"))) // Nobody trust university system that is fully reliable
-                }
-            } else {
-                val announcements = AnnouncementsList.getAnnouncements(
-                    passingStudentsListText = makePassingStudentsListText(),
-                    bestStudentsListText = makePassingStudentsListText()
-                )
-                uiThread {
-                    callback(Success(announcements))
-                }
+            val resp = getAnnouncements()
+            uiThread {
+                callback(resp)
             }
         }
     }
