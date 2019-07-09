@@ -6,4 +6,5 @@ import com.workshop.universityannouncementsboard.model.Response
 interface AnnouncementsRepository {
 
     fun getAnnouncements(): Response<List<Announcement>, Throwable>
+    fun getAnnouncements(callback: (Response<List<Announcement>, Throwable>)->Unit)
 }
