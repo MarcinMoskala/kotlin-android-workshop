@@ -4,8 +4,8 @@ import org.junit.*
 import org.junit.Assert.*
 
 // TODO: Uncomment
-//import com.workshop.universityannouncementsboard.extra.flatMap
-//import kotlin.collections.flatMap as stdlibFlatMap
+//import com.workshop.universityannouncementsboard.extra.map
+//import kotlin.collections.map as stdlibMap
 
 class MapTest {
 
@@ -19,5 +19,6 @@ class MapTest {
 
         assertEquals(listOf("MIKE", "JANE", "MARCIN", "JOHN", "JAMES"), upper)
         assertEquals(listOf(2, 4, 6, 8, 10), doubled)
+        assertEquals(listOf(null, null), listOf(1,2).map { null })
     }
 }
