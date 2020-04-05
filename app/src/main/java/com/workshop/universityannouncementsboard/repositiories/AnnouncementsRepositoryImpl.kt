@@ -10,7 +10,7 @@ class AnnouncementsRepositoryImpl(val studentsRepository: StudentsRepository) : 
 
     override fun getAnnouncements(): Response<List<Announcement>, Throwable> {
         Thread.sleep(2000) // Nobody trust university system that works too fast
-        if (Random.nextBoolean()) return ErrorResponse(Error("Random error")) // Nobody trust university system that is fully reliable
+        if (Random.nextBoolean()) return Failure(Error("Random error")) // Nobody trust university system that is fully reliable
         val announcements = AnnouncementsList.getAnnouncements(
             passingStudentsListText = makePassingStudentsListText(),
             bestStudentsListText = makeBestStudentsList()

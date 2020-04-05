@@ -1,7 +1,7 @@
 package com.workshop.universityannouncementsboard
 
 import com.workshop.universityannouncementsboard.model.Announcement
-import com.workshop.universityannouncementsboard.model.ErrorResponse
+import com.workshop.universityannouncementsboard.model.Failure
 import com.workshop.universityannouncementsboard.model.Success
 import com.workshop.universityannouncementsboard.presentation.MainPresenter
 import com.workshop.universityannouncementsboard.presentation.MainView
@@ -57,7 +57,7 @@ class MainPresenterTest {
     fun `When repository returns error, it is shown on view`() {
         val view: MainView = mockk(relaxed = true)
         val repo: AnnouncementsRepository = mockk(relaxed = true)
-        every { repo.getAnnouncements() } returns ErrorResponse(someError)
+        every { repo.getAnnouncements() } returns Failure(someError)
         val presenter = MainPresenter(view, repo)
 
         // When

@@ -51,7 +51,7 @@ class MainPresenterCallbackTest {
     @Test
     fun `When repository returns error, it is shown on view`() {
         val view: MainView = mockk(relaxed = true)
-        val repo = makeAnnouncementRepositoryReturning(ErrorResponse(someError))
+        val repo = makeAnnouncementRepositoryReturning(Failure(someError))
         val presenter = MainPresenter(view, repo)
 
         // When
