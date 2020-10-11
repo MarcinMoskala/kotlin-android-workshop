@@ -10,6 +10,7 @@ import com.workshop.universityannouncementsboard.domain.MainView
 import com.workshop.universityannouncementsboard.model.Announcement
 import com.workshop.universityannouncementsboard.repositiories.AnnouncementsRepositoryImpl
 import com.workshop.universityannouncementsboard.repositiories.HardcodedStudentsRepository
+import com.workshop.universityannouncementsboard.repositiories.NetworkStudentRepositoryV2
 import com.workshop.universityannouncementsboard.util.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.properties.Delegates
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity(), MainView {
         swipeRefreshView.isRefreshing = newValue
     }
 
-    private val studentsRepository by lazy { HardcodedStudentsRepository() }
+    private val studentsRepository by lazy { NetworkStudentRepositoryV2() }
     private val announcementsRepository by lazy { AnnouncementsRepositoryImpl(studentsRepository) }
     private val presenter by lazy { MainPresenter(this, announcementsRepository) }
 

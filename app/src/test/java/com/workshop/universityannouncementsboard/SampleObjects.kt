@@ -8,6 +8,11 @@ val studentWithNotEnoughPointsForInternship = Student("Marcello", "Smith", 87.0,
 val studentNotPassingBecauseOfResult = Student("Peter", "Jackson", 21.0, 24)
 val studentNotPassingBecauseOfPoints = Student("Michael", "Angelo", 71.0, 12)
 
+val aStudent1 = Student("Noe", "Samson", 41.0, 18)
+val aStudent2 = Student("Timothy", "Johnson", 51.0, 15)
+val aStudent3 = Student("Noe", "Peterson", 91.0, 22)
+val aStudent4 = Student("Ester", "Adams", 81.0, 30)
+
 val students = listOf(
         internshipStudent,
         studentWithTooLowResultToInternship,
@@ -15,10 +20,10 @@ val students = listOf(
         studentNotPassingBecauseOfResult,
         Student("Noely", "Peterson", 91.0, 22),
         studentNotPassingBecauseOfPoints,
-        Student("Noe", "Samson", 41.0, 18),
-        Student("Timothy", "Johnson", 51.0, 15),
-        Student("Noe", "Peterson", 91.0, 22),
-        Student("Ester", "Adams", 81.0, 30),
+        aStudent1,
+        aStudent2,
+        aStudent3,
+        aStudent4,
         Student("Dior", "Angel", 88.5, 38),
         Student("Naja", "Marcson", 100.0, 31),
         Student("Oregon", "Dart", 85.5, 30),

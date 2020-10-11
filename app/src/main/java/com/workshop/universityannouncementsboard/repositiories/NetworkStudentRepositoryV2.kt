@@ -2,49 +2,51 @@ package com.workshop.universityannouncementsboard.repositiories
 
 import com.workshop.universityannouncementsboard.domain.StudentsRepository
 import com.workshop.universityannouncementsboard.model.Student
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
 
-class NetworkStudentRepository(
+class NetworkStudentRepositoryV2(
         private val api: Api = makeRetrofit("https://api.kt.academy/api/").create(Api::class.java)
 ): StudentsRepository {
 
-    override suspend fun getStudents(): List<Student> {
-        TODO("Not yet implemented")
+    override suspend fun getStudents(): List<Student> = coroutineScope {
+        api.getSemesterKeys()
+                .map { async { api.getSemester(it) } }
+                .awaitAll()
+                .flatMap { it.students }
+                .map { it.toStudent() }
     }
 
     interface Api {
-
         @Headers("Accept: application/json")
-        @GET("v1/student")
-        suspend fun getStudents(): List<StudentJson>
-
-        @Headers("Accept: application/json")
-        @GET("v2/semester/keys")
+        @GET("v2/semester")
         suspend fun getSemesterKeys(): List<String>
 
         @Headers("Accept: application/json")
         @GET("v2/semester/{key}")
-        suspend fun getSemester(@Path("key") semesterKey: String): List<SemesterJson>
+        suspend fun getSemester(@Path("key") semesterKey: String): SemesterJsonV2
     }
 }
 
-class StudentJson(
+class StudentJsonV2(
         val name: String,
         val surname: String,
         val result: Double,
         val pointsInSemester: Int
 )
 
-fun StudentJson.toStudent() = Student(
+fun StudentJsonV2.toStudent() = Student(
         name = name,
         surname = surname,
         result = result,
         pointsInSemester = pointsInSemester
 )
 
-class SemesterJson(
+class SemesterJsonV2(
         val key: String,
-        val students: List<Student>
+        val students: List<StudentJsonV2>
 )
