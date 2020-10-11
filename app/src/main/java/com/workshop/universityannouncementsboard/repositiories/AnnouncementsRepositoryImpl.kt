@@ -11,11 +11,15 @@ import kotlin.random.*
 class AnnouncementsRepositoryImpl(private val studentsRepository: StudentsRepository) : AnnouncementsRepository {
 
     override suspend fun getAnnouncements(): Response<List<Announcement>, Throwable> {
-        val announcements = AnnouncementsList.getAnnouncements(
-            passingStudentsListText = makePassingStudentsListText(),
-            bestStudentsListText = makeBestStudentsList()
-        )
-        return Success(announcements)
+        try {
+            val announcements = AnnouncementsList.getAnnouncements(
+                    passingStudentsListText = makePassingStudentsListText(),
+                    bestStudentsListText = makeBestStudentsList()
+            )
+            return Success(announcements)
+        } catch (e: Throwable) {
+            return Failure(e)
+        }
     }
 
     /*
@@ -23,11 +27,7 @@ class AnnouncementsRepositoryImpl(private val studentsRepository: StudentsReposi
      * at least 50, in alphabetical order (surname then name), in the format: “{name} {surname}, {result}”
      */
     // TODO: Should return passing students list. See PassingStudentsListTest
-    suspend fun makePassingStudentsListText(): String = studentsRepository
-            .getStudents()
-            .filter { it.pointsInSemester > 15 && it.result >= 50 }
-            .sortedWith(compareBy({ it.surname }, { it.name }))
-            .joinToString(separator = "\n") { "${it.name} ${it.surname}, ${it.result}" }
+    suspend fun makePassingStudentsListText(): String = "TODO"
 
     /*
      * Displays the best 10 students so they can get an internship. Comparing students by result
@@ -37,12 +37,5 @@ class AnnouncementsRepositoryImpl(private val studentsRepository: StudentsReposi
      * then name) in the format “{name} {surname}, ${internship size}”
      */
     // TODO: Should return students for internship. See BestStudentsListTest
-    suspend fun makeBestStudentsList(): String = studentsRepository.getStudents()
-            .filter { it.pointsInSemester >= 30 && it.result >= 80 }
-            .sortedByDescending { it.result }
-            .zip(internships)
-            .sortedWith(compareBy({ it.first.surname }, { it.first.name }))
-            .joinToString(separator = "\n") { (s, i) -> "${s.name} ${s.surname}, \$$i" }
-
-    private val internships = List(1) { 5000 } + List(3) { 3000 } + List(6) { 1000 }
+    suspend fun makeBestStudentsList(): String = "TODO"
 }

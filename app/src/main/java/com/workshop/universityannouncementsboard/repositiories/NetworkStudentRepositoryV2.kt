@@ -13,13 +13,7 @@ class NetworkStudentRepositoryV2(
         private val api: Api = makeRetrofit("https://api.kt.academy/api/").create(Api::class.java)
 ): StudentsRepository {
 
-    override suspend fun getStudents(): List<Student> = coroutineScope {
-        api.getSemesterKeys()
-                .map { async { api.getSemester(it) } }
-                .awaitAll()
-                .flatMap { it.students }
-                .map { it.toStudent() }
-    }
+    override suspend fun getStudents(): List<Student> = TODO()
 
     interface Api {
         @Headers("Accept: application/json")

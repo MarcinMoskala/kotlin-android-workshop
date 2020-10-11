@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), MainView {
         swipeRefreshView.isRefreshing = newValue
     }
 
-    private val studentsRepository by lazy { NetworkStudentRepositoryV2() }
+    private val studentsRepository by lazy { HardcodedStudentsRepository() }
     private val announcementsRepository by lazy { AnnouncementsRepositoryImpl(studentsRepository) }
     private val presenter by lazy { MainPresenter(this, announcementsRepository) }
 
@@ -40,22 +40,14 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     fun onActivityCreated() {
-        listView.layoutManager = LinearLayoutManager(this)
-        swipeRefreshView.setOnRefreshListener {
-            presenter.onRefresh()
-        }
-        presenter.onCreate()
+        // TODO
     }
 
     override fun showAnnouncements(announcements: List<Announcement>) {
-        val titleItem = TitleItemAdapter("Announcements")
-        val announcementsItems = announcements.map(::AnnouncementItemAdapter)
-        listView.adapter = AnnouncementsListAdapter(listOf(titleItem) + announcementsItems)
+        // TODO
     }
 
     override fun showError(error: Throwable) {
-        if (listView.adapter == null) {
-            listView.adapter = AnnouncementsListAdapter(listOf(TitleItemAdapter("Keep refreshing")))
-        }
+        // TODO
     }
 }

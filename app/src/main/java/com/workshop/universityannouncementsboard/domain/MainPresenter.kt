@@ -3,6 +3,7 @@ package com.workshop.universityannouncementsboard.domain
 import com.workshop.universityannouncementsboard.model.Failure
 import com.workshop.universityannouncementsboard.model.Success
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 // TODO: Write logic for MainPresenter to pass all tests in MainPresenterTest. Use cases:
 // * When onCreate, loads and displays announcements
@@ -16,26 +17,11 @@ class MainPresenter(
         private val announcementsRepository: AnnouncementsRepository
 ) : BasePresenter() {
 
-    fun onCreate(): Unit {
-        launch {
-            view.loading = true
-            refresh()
-            view.loading = false
-        }
+    fun onCreate() = runBlocking {
+        // TODO
     }
 
-    fun onRefresh() {
-        launch {
-            view.swipeRefresh = true
-            refresh()
-            view.swipeRefresh = false
-        }
-    }
-
-    private suspend fun refresh() {
-        when (val resp = announcementsRepository.getAnnouncements()) {
-            is Success -> view.showAnnouncements(resp.value)
-            is Failure -> view.showError(resp.error)
-        }
+    fun onRefresh() = runBlocking {
+        // TODO
     }
 }
