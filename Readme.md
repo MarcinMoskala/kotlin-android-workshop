@@ -1,7 +1,7 @@
 
 # Kotlin in Android workshop
 
-This project containes exercises and examples for [Kt. Academy Kotlin in Android workshop](https://kt.academy/Kotlin_in_Android).
+This project containes exercises and examples for [Kt. Academy Kotlin in Android workshop](https://kt.academy/workshop/android).
 
 Workshop coveres:
 * Variety of Kotlin structures
@@ -26,5 +26,5 @@ Workshop coveres:
 
 All in terms of Android development, and practiced while developing a real-life Android application. 
 
-If you are interested in having this workshop in your company, you can find details [here](https://kt.academy/Kotlin_in_Android) or just fill [the form](https://marcinmoskala.typeform.com/to/MMHtNM).
+If you are interested in having this workshop in your company, you can find details [here](https://kt.academy/workshop/android) or just fill [the form](https://kt.academy/workshopForm/android).
 
