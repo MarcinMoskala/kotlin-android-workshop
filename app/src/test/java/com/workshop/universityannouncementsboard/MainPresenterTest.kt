@@ -3,9 +3,9 @@ package com.workshop.universityannouncementsboard
 import com.workshop.universityannouncementsboard.model.Announcement
 import com.workshop.universityannouncementsboard.model.Failure
 import com.workshop.universityannouncementsboard.model.Success
-import com.workshop.universityannouncementsboard.presentation.MainPresenter
-import com.workshop.universityannouncementsboard.presentation.MainView
-import com.workshop.universityannouncementsboard.repositiories.AnnouncementsRepository
+import com.workshop.universityannouncementsboard.domain.MainPresenter
+import com.workshop.universityannouncementsboard.domain.MainView
+import com.workshop.universityannouncementsboard.domain.AnnouncementsRepository
 import io.mockk.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -19,7 +19,7 @@ class MainPresenterTest {
     fun `When onCreate, loads and displays announcements`() {
         val view: MainView = mockk(relaxed = true)
         val repo: AnnouncementsRepository = mockk(relaxed = true)
-        every { repo.getAnnouncements() } returns Success(someAnnouncements)
+        coEvery { repo.getAnnouncements() } returns Success(someAnnouncements)
         val presenter = MainPresenter(view, repo)
 
         // When
@@ -27,7 +27,7 @@ class MainPresenterTest {
 
         // Then
         val capturingSlot = slot<List<Announcement>>()
-        verify(ordering = Ordering.ORDERED) {
+        coVerify(ordering = Ordering.ORDERED) {
             repo.getAnnouncements()
             view.showAnnouncements(capture(capturingSlot))
         }
@@ -38,14 +38,14 @@ class MainPresenterTest {
     fun `Refresh is displayed during onCreate loading`() {
         val view: MainView = mockk(relaxed = true)
         val repo: AnnouncementsRepository = mockk(relaxed = true)
-        every { repo.getAnnouncements() } returns Success(listOf())
+        coEvery { repo.getAnnouncements() } returns Success(listOf())
         val presenter = MainPresenter(view, repo)
 
         // When
         presenter.onCreate()
 
         // Then
-        verifySequence {
+        coVerifySequence {
             view.loading = true
             repo.getAnnouncements()
             view.showAnnouncements(any())
@@ -57,7 +57,7 @@ class MainPresenterTest {
     fun `When repository returns error, it is shown on view`() {
         val view: MainView = mockk(relaxed = true)
         val repo: AnnouncementsRepository = mockk(relaxed = true)
-        every { repo.getAnnouncements() } returns Failure(someError)
+        coEvery { repo.getAnnouncements() } returns Failure(someError)
         val presenter = MainPresenter(view, repo)
 
         // When
@@ -65,7 +65,7 @@ class MainPresenterTest {
 
         // Then
         val capturingSlot = slot<Throwable>()
-        verify(ordering = Ordering.ORDERED) {
+        coVerify(ordering = Ordering.ORDERED) {
             repo.getAnnouncements()
             view.showError(capture(capturingSlot))
         }
@@ -76,7 +76,7 @@ class MainPresenterTest {
     fun `When different data are served after refresh, new data are displayed`() {
         val view: MainView = mockk(relaxed = true)
         val repo: AnnouncementsRepository = mockk(relaxed = true)
-        every { repo.getAnnouncements() } returnsMany listOf(Success(listOf()), Success(someAnnouncements))
+        coEvery { repo.getAnnouncements() } returnsMany listOf(Success(listOf()), Success(someAnnouncements))
         val presenter = MainPresenter(view, repo)
 
         // When
@@ -85,7 +85,7 @@ class MainPresenterTest {
 
         // Then
         val capturingSlot = slot<List<Announcement>>()
-        verifySequence {
+        coVerifySequence {
             view.loading = true
             repo.getAnnouncements()
             view.showAnnouncements(any())
@@ -103,7 +103,7 @@ class MainPresenterTest {
     fun `During refresh, swipeRefresh is displayed and loading is not`() {
         val view: MainView = mockk(relaxed = true)
         val repo: AnnouncementsRepository = mockk(relaxed = true)
-        every { repo.getAnnouncements() } returns Success(listOf())
+        coEvery { repo.getAnnouncements() } returns Success(listOf())
         val presenter = MainPresenter(view, repo)
 
         // When
@@ -111,7 +111,7 @@ class MainPresenterTest {
         presenter.onRefresh()
 
         // Then
-        verifySequence {
+        coVerifySequence {
             view.loading = true
             repo.getAnnouncements()
             view.showAnnouncements(any())

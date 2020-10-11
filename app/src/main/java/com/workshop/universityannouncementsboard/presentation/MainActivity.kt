@@ -5,12 +5,13 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.workshop.universityannouncementsboard.R
+import com.workshop.universityannouncementsboard.domain.MainPresenter
+import com.workshop.universityannouncementsboard.domain.MainView
 import com.workshop.universityannouncementsboard.model.Announcement
 import com.workshop.universityannouncementsboard.repositiories.AnnouncementsRepositoryImpl
-import com.workshop.universityannouncementsboard.repositiories.StudentsRepositoryImpl
+import com.workshop.universityannouncementsboard.repositiories.HardcodedStudentsRepository
 import com.workshop.universityannouncementsboard.util.toast
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.concurrent.thread
 import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity(), MainView {
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity(), MainView {
         swipeRefreshView.isRefreshing = newValue
     }
 
-    private val studentsRepository by lazy { StudentsRepositoryImpl() }
+    private val studentsRepository by lazy { HardcodedStudentsRepository() }
     private val announcementsRepository by lazy { AnnouncementsRepositoryImpl(studentsRepository) }
     private val presenter by lazy { MainPresenter(this, announcementsRepository) }
 
@@ -55,6 +56,5 @@ class MainActivity : AppCompatActivity(), MainView {
         if (listView.adapter == null) {
             listView.adapter = AnnouncementsListAdapter(listOf(TitleItemAdapter("Keep refreshing")))
         }
-        toast(error.message ?: "Unknown error")
     }
 }

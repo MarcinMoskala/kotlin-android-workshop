@@ -1,9 +1,10 @@
 package com.workshop.universityannouncementsboard.repositiories
 
 import com.workshop.universityannouncementsboard.model.Student
+import com.workshop.universityannouncementsboard.domain.StudentsRepository
 
-class StudentsRepositoryImpl : StudentsRepository {
-    override fun getStudents(): List<Student> = listOf(
+class HardcodedStudentsRepository : StudentsRepository {
+    override suspend fun getStudents(): List<Student> = listOf(
             Student("Marc", "Smith", 87.0, 32),
             Student("Marc", "Smith", 37.0, 32),
             Student("Marc", "Smith", 87.0, 12),

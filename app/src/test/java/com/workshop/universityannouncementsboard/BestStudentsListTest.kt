@@ -2,18 +2,20 @@ package com.workshop.universityannouncementsboard
 
 import com.workshop.universityannouncementsboard.model.Student
 import com.workshop.universityannouncementsboard.repositiories.AnnouncementsRepositoryImpl
-import com.workshop.universityannouncementsboard.repositiories.StudentsRepository
+import com.workshop.universityannouncementsboard.domain.StudentsRepository
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class BestStudentsListTest {
 
     @Test
-    fun `Single student that matches criteria gets biggest internship`() {
+    fun `Single student that matches criteria gets biggest internship`() = runBlocking {
         val repo: StudentsRepository = mockk()
-        every { repo.getStudents() } returns listOf(internshipStudent)
+        coEvery { repo.getStudents() } returns listOf(internshipStudent)
         val annRepo = AnnouncementsRepositoryImpl(repo)
 
         // When
@@ -25,9 +27,9 @@ class BestStudentsListTest {
     }
 
     @Test
-    fun `Single student with too low result doesn't get internship`() {
+    fun `Single student with too low result doesn't get internship`() = runBlocking {
         val repo: StudentsRepository = mockk()
-        every { repo.getStudents() } returns listOf(studentWithTooLowResultToInternship)
+        coEvery { repo.getStudents() } returns listOf(studentWithTooLowResultToInternship)
         val annRepo = AnnouncementsRepositoryImpl(repo)
 
         // When
@@ -38,10 +40,10 @@ class BestStudentsListTest {
     }
 
     @Test
-    fun `Result 80 is acceptable`() {
+    fun `Result 80 is acceptable`() = runBlocking {
         val student = Student("Noely", "Peterson", 80.0, 32)
         val repo: StudentsRepository = mockk()
-        every { repo.getStudents() } returns listOf(student)
+        coEvery { repo.getStudents() } returns listOf(student)
         val annRepo = AnnouncementsRepositoryImpl(repo)
 
         // When
@@ -52,10 +54,10 @@ class BestStudentsListTest {
     }
 
     @Test
-    fun `30 points is acceptable`() {
+    fun `30 points is acceptable`() = runBlocking {
         val student = Student("Noely", "Peterson", 81.0, 30)
         val repo: StudentsRepository = mockk()
-        every { repo.getStudents() } returns listOf(student)
+        coEvery { repo.getStudents() } returns listOf(student)
         val annRepo = AnnouncementsRepositoryImpl(repo)
 
         // When
@@ -66,9 +68,9 @@ class BestStudentsListTest {
     }
 
     @Test
-    fun `Single student with not enough doesn't get internship`() {
+    fun `Single student with not enough doesn't get internship`() = runBlocking {
         val repo: StudentsRepository = mockk()
-        every { repo.getStudents() } returns listOf(studentWithNotEnoughPointsForInternship)
+        coEvery { repo.getStudents() } returns listOf(studentWithNotEnoughPointsForInternship)
         val annRepo = AnnouncementsRepositoryImpl(repo)
 
         // When
@@ -79,9 +81,9 @@ class BestStudentsListTest {
     }
 
     @Test
-    fun `Complex test`() {
+    fun `Complex test`() = runBlocking {
         val repo: StudentsRepository = mockk()
-        every { repo.getStudents() } returns students
+        coEvery { repo.getStudents() } returns students
         val annRepo = AnnouncementsRepositoryImpl(repo)
 
         // When

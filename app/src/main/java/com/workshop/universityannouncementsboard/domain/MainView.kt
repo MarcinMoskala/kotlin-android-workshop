@@ -1,4 +1,4 @@
-package com.workshop.universityannouncementsboard.presentation
+package com.workshop.universityannouncementsboard.domain
 
 import com.workshop.universityannouncementsboard.model.Announcement
 

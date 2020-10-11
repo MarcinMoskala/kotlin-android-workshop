@@ -3,11 +3,14 @@ package com.workshop.universityannouncementsboard
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import com.workshop.universityannouncementsboard.domain.MainPresenter
 import com.workshop.universityannouncementsboard.model.Announcement
 import com.workshop.universityannouncementsboard.presentation.*
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.SpyK
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -26,6 +29,8 @@ class MainActivityTest {
 
     @Before
     fun setUp() {
+        Dispatchers.setMain(Dispatchers.Unconfined)
+
         MockKAnnotations.init(this, relaxUnitFun = true)
 
         every { activity.findViewById<RecyclerView>(R.id.listView) } returns listViewMock
