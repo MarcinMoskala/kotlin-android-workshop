@@ -1,14 +1,11 @@
 package com.workshop.universityannouncementsboard.util
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.*
 
-open class BaseRecyclerViewAdapter(
-        items: List<ItemAdapter>
+abstract class BaseRecyclerViewAdapter(
+    val items: List<ItemAdapter>
 ) : RecyclerView.Adapter<BaseViewHolder>() {
-
-    protected val items = items.toMutableList()
 
     final override fun getItemCount() = items.size
 
@@ -20,6 +17,9 @@ open class BaseRecyclerViewAdapter(
     }
 
     final override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        items[position].bindViewHolder(holder)
+        items[position].apply {
+            containerView = holder.view
+            setupView()
+        }
     }
 }

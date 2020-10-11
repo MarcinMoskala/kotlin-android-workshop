@@ -1,12 +1,11 @@
 package com.workshop.universityannouncementsboard.util
 
 import android.support.annotation.LayoutRes
+import android.view.*
+import kotlinx.android.extensions.*
 
-abstract class ItemAdapter(@LayoutRes open val layoutId: Int) {
+abstract class ItemAdapter(@LayoutRes open val layoutId: Int): LayoutContainer {
+    override var containerView: View? = null
 
-    fun bindViewHolder(holder: BaseViewHolder) {
-        holder.onBindViewHolder()
-    }
-
-    abstract fun BaseViewHolder.onBindViewHolder()
+    abstract fun setupView()
 }
