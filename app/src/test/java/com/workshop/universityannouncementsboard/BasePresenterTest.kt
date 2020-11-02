@@ -24,24 +24,24 @@ class BasePresenterTest {
         var cancelledJobs = 0
 
         fun onCreate() {
-            launch {
-                try {
-                    delay(100)
-                    jobInterceptor?.invoke()
-                    delay(2000)
-                } finally {
-                    cancelledJobs += 1
-                }
-            }
-            launch {
-                try {
-                    delay(100)
-                    jobInterceptor?.invoke()
-                    delay(2000)
-                } finally {
-                    cancelledJobs += 1
-                }
-            }
+//            launch {
+//                try {
+//                    delay(100)
+//                    jobInterceptor?.invoke()
+//                    delay(2000)
+//                } finally {
+//                    cancelledJobs += 1
+//                }
+//            }
+//            launch {
+//                try {
+//                    delay(100)
+//                    jobInterceptor?.invoke()
+//                    delay(2000)
+//                } finally {
+//                    cancelledJobs += 1
+//                }
+//            }
         }
     }
 
@@ -91,14 +91,14 @@ class BasePresenterTest {
         var cancelledJobs = 0
 
         fun onCreate() {
-            launch {
-                delay(100)
-                throw Error()
-            }
-            launch {
-                delay(200)
-                onSecondAction()
-            }
+//            launch {
+//                delay(100)
+//                throw Error()
+//            }
+//            launch {
+//                delay(200)
+//                onSecondAction()
+//            }
         }
     }
 
