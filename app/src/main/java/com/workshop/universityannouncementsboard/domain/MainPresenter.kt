@@ -13,8 +13,8 @@ import kotlinx.coroutines.runBlocking
 // * During refresh, swipeRefresh is displayed and loading is not
 
 class MainPresenter(
-        private val view: MainView,
-        private val announcementsRepository: AnnouncementsRepository
+    private val view: MainView,
+    private val announcementsRepository: AnnouncementsRepository
 ) : BasePresenter() {
 
     fun onCreate() = runBlocking {

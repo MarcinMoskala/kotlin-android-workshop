@@ -31,13 +31,13 @@ class NetworkStudentRepositoryV1Test {
     class FakeStudentApi(val students: List<Student>) : NetworkStudentRepositoryV1.Api {
 
         override suspend fun getStudents(): List<StudentJsonV1> =
-                students.map { it.toStudentJson() }
+            students.map { it.toStudentJson() }
     }
 }
 
 private fun Student.toStudentJson() = StudentJsonV1(
-        name = name,
-        surname = surname,
-        result = result,
-        pointsInSemester = pointsInSemester
+    name = name,
+    surname = surname,
+    result = result,
+    pointsInSemester = pointsInSemester
 )

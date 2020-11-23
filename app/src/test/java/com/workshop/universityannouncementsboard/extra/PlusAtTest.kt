@@ -33,7 +33,7 @@ class PlusAtTest {
 
     }
 
-    private fun catchError(f: ()->Unit): Throwable? = try {
+    private fun catchError(f: () -> Unit): Throwable? = try {
         f()
         null
     } catch (e: Throwable) {

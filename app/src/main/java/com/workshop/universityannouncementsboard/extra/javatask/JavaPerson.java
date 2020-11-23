@@ -1,6 +1,7 @@
 package com.workshop.universityannouncementsboard.extra.javatask;
 
 import kotlin.jvm.internal.Intrinsics;
+
 import org.jetbrains.annotations.NotNull;
 
 public class JavaPerson {

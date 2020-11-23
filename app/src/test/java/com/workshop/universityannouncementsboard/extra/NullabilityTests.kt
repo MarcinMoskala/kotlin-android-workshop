@@ -6,7 +6,7 @@ import org.junit.*
 
 class NullabilityTests {
 
-    class MailCollector(): Mailer {
+    class MailCollector() : Mailer {
         data class Mail(val email: String, val message: String)
 
         var emails = listOf<Mail>()

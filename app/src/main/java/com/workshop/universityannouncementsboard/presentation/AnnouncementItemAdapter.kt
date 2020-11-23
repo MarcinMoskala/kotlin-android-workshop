@@ -12,6 +12,6 @@ data class AnnouncementItemAdapter(
     override fun setupView() {
         titleView.text = announcement.title ?: ""
         textView.text = announcement.text
-        if(announcement.title == null) titleView.hide()
+        if (announcement.title == null) titleView.hide()
     }
 }

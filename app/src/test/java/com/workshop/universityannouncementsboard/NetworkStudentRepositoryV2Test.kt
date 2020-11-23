@@ -27,10 +27,10 @@ class NetworkStudentRepositoryV2Test {
 
         // then
         val expected = listOf(
-                aStudent1,
-                aStudent2,
-                aStudent3,
-                aStudent4,
+            aStudent1,
+            aStudent2,
+            aStudent3,
+            aStudent4,
         )
         assertEquals(expected, res)
     }
@@ -87,13 +87,13 @@ class NetworkStudentRepositoryV2Test {
         override suspend fun getSemesterKeys(): List<String> = listOf("S1", "S2", "S3")
 
         override suspend fun getSemester(semesterKey: String): SemesterJsonV2 = SemesterJsonV2(
-                key = semesterKey,
-                students = when (semesterKey) {
-                    "S1" -> listOf(aStudent1.toStudentJson())
-                    "S2" -> listOf(aStudent2.toStudentJson(), aStudent3.toStudentJson())
-                    "S3" -> listOf(aStudent4.toStudentJson())
-                    else -> error("Unknown semester $semesterKey")
-                })
+            key = semesterKey,
+            students = when (semesterKey) {
+                "S1" -> listOf(aStudent1.toStudentJson())
+                "S2" -> listOf(aStudent2.toStudentJson(), aStudent3.toStudentJson())
+                "S3" -> listOf(aStudent4.toStudentJson())
+                else -> error("Unknown semester $semesterKey")
+            })
 
     }
 
@@ -141,8 +141,8 @@ class NetworkStudentRepositoryV2Test {
 }
 
 private fun Student.toStudentJson() = StudentJsonV2(
-        name = name,
-        surname = surname,
-        result = result,
-        pointsInSemester = pointsInSemester
+    name = name,
+    surname = surname,
+    result = result,
+    pointsInSemester = pointsInSemester
 )

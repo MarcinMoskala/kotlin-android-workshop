@@ -17,7 +17,7 @@ fun main() = runBlocking {
         }
     }
 
-    for(received in channel) {
+    for (received in channel) {
         println(received)
     }
 }

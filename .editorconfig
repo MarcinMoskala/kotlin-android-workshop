@@ -1,0 +1,8 @@
+[*.{kt,kts}]
+indent_size=4
+disabled_rules=import-ordering
+ij_kotlin_code_style_defaults = KOTLIN_OFFICIAL
+ij_continuation_indent_size = 4
+ij_kotlin_name_count_to_use_star_import = 2147483647
+ij_kotlin_name_count_to_use_star_import_for_members = 2147483647
+# If needed, more configurations consistent with ktlint here: https://github.com/pinterest/ktlint/issues/701

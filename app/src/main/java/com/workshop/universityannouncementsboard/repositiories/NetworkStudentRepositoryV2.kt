@@ -10,8 +10,8 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 
 class NetworkStudentRepositoryV2(
-        private val api: Api = makeRetrofit("https://api.kt.academy/api/").create(Api::class.java)
-): StudentsRepository {
+    private val api: Api = makeRetrofit("https://api.kt.academy/api/").create(Api::class.java)
+) : StudentsRepository {
 
     override suspend fun getStudents(): List<Student> = TODO()
 
@@ -27,20 +27,20 @@ class NetworkStudentRepositoryV2(
 }
 
 class StudentJsonV2(
-        val name: String,
-        val surname: String,
-        val result: Double,
-        val pointsInSemester: Int
+    val name: String,
+    val surname: String,
+    val result: Double,
+    val pointsInSemester: Int
 )
 
 fun StudentJsonV2.toStudent() = Student(
-        name = name,
-        surname = surname,
-        result = result,
-        pointsInSemester = pointsInSemester
+    name = name,
+    surname = surname,
+    result = result,
+    pointsInSemester = pointsInSemester
 )
 
 class SemesterJsonV2(
-        val key: String,
-        val students: List<StudentJsonV2>
+    val key: String,
+    val students: List<StudentJsonV2>
 )

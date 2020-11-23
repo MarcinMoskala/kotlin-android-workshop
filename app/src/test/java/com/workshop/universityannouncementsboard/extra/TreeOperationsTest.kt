@@ -24,7 +24,7 @@ class TreeOperationsTest {
        AAA    BBB      AAA    BBB
      */
     val tree2 =
-            Node(Node(Node(Leaf("AAA"), Leaf("BBB")), Leaf("CCC")), Node(Node(Leaf("AAA"), Leaf("BBB")), Leaf("CCC")))
+        Node(Node(Node(Leaf("AAA"), Leaf("BBB")), Leaf("CCC")), Node(Node(Leaf("AAA"), Leaf("BBB")), Leaf("CCC")))
 
     /*
                 root Node

@@ -19,6 +19,6 @@ class MapTest {
 
         assertEquals(listOf("MIKE", "JANE", "MARCIN", "JOHN", "JAMES"), upper)
         assertEquals(listOf(2, 4, 6, 8, 10), doubled)
-        assertEquals(listOf(null, null), listOf(1,2).map { null })
+        assertEquals(listOf(null, null), listOf(1, 2).map { null })
     }
 }

@@ -6,14 +6,15 @@ abstract class Tree {
         return treeToString(this, StringBuilder()).toString()
     }
 }
-class Leaf(val value: String): Tree()
-class Node(val left: Tree, val right: Tree): Tree()
+
+class Leaf(val value: String) : Tree()
+class Node(val left: Tree, val right: Tree) : Tree()
 
 private fun treeToString(tree: Tree, sb: StringBuilder): StringBuilder {
-    if(tree is Leaf) {
+    if (tree is Leaf) {
         val leaf = tree as Leaf
         sb.append(leaf.value)
-    } else if(tree is Node) {
+    } else if (tree is Node) {
         val node = tree as Node
         sb.append("(")
         treeToString(node.left, sb)

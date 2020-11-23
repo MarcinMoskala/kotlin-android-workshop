@@ -19,20 +19,20 @@ class PowersetTest {
     @Test
     fun `Powerset simple example test`() {
         val set = setOf(
-                setOf(1, 2, 3),
-                setOf(1, 2),
-                setOf(1, 3),
-                setOf(2, 3),
-                setOf(1),
-                setOf(2),
-                setOf(3),
-                setOf())
+            setOf(1, 2, 3),
+            setOf(1, 2),
+            setOf(1, 3),
+            setOf(2, 3),
+            setOf(1),
+            setOf(2),
+            setOf(3),
+            setOf())
         assertEquals(set, setOf(1, 2, 3).powerset())
     }
 
     @Test
     fun `Size of n element set powerset is 2^n`() {
-        for(n in 1..6) {
+        for (n in 1..6) {
             val set = (1..n).toSet()
             val size = 2.pow(n)
             assertEquals(size, set.powerset().size)

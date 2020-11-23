@@ -13,24 +13,25 @@ import kotlin.coroutines.resume
 //    return "Some config"
 //}
 
-fun getConfig(continuation: Continuation<String>): Any  /* String & COROUTINE_SUSPENDED */{
-    val cont = continuation as? `CoroutineExampleKt$getConfig` ?: `CoroutineExampleKt$getConfig`(continuation)
+fun getConfig(continuation: Continuation<String>): Any  /* String & COROUTINE_SUSPENDED */ {
+    val cont = continuation as? `CoroutineExampleKt$getConfig`
+        ?: `CoroutineExampleKt$getConfig`(continuation)
 
-    if(cont.label == 0) {
+    if (cont.label == 0) {
         println("A")
         cont.label = 1
-        if(_delay(cont, 1000) == COROUTINE_SUSPENDED) {
+        if (_delay(cont, 1000) == COROUTINE_SUSPENDED) {
             return COROUTINE_SUSPENDED
         }
     }
-    if(cont.label == 1) {
+    if (cont.label == 1) {
         println("B")
         return "Some config"
     }
     error("Impossible")
 }
 
-class `CoroutineExampleKt$getConfig`(val continuation: Continuation<*>): Continuation<String> {
+class `CoroutineExampleKt$getConfig`(val continuation: Continuation<*>) : Continuation<String> {
     var label = 0
 
     override val context: CoroutineContext
@@ -49,12 +50,13 @@ val EXECUTOR = Executors.newSingleThreadScheduledExecutor {
 }
 
 fun _delay(continuation: Continuation<*>, time: Long): Any? {
-    val cont = continuation as? `CoroutineExampleKt$delay` ?: `CoroutineExampleKt$delay`(continuation)
+    val cont = continuation as? `CoroutineExampleKt$delay`
+        ?: `CoroutineExampleKt$delay`(continuation)
     EXECUTOR.schedule({ cont.resume(Unit) }, time, SECONDS)
     return COROUTINE_SUSPENDED
 }
 
-class `CoroutineExampleKt$delay`(val continuation: Continuation<*>): Continuation<Unit> {
+class `CoroutineExampleKt$delay`(val continuation: Continuation<*>) : Continuation<Unit> {
     var label = 0
 
     override val context: CoroutineContext

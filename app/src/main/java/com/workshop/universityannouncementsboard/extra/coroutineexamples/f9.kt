@@ -10,8 +10,8 @@ import kotlin.system.measureTimeMillis
 suspend fun main() {
     measureTimeMillis {
         ('A'..'C').asFlow()
-                .onEach { delay(1500) }
-                .flatMapLatest { flowFrom(it) }
-                .collect { print(it) } // A_0 C_0 C_1 C_2
+            .onEach { delay(1500) }
+            .flatMapLatest { flowFrom(it) }
+            .collect { print(it) } // A_0 C_0 C_1 C_2
     }.let(::print) // 1058
 }

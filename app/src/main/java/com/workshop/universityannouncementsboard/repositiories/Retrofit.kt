@@ -10,30 +10,30 @@ import java.util.concurrent.TimeUnit
 
 private val gson: Gson by lazy {
     Gson().newBuilder()
-            .serializeNulls()
-            .create()
+        .serializeNulls()
+        .create()
 }
 
 fun makeRetrofit(baseUrl: String): Retrofit = Retrofit.Builder()
-        .baseUrl(baseUrl)
-        .client(makeHttpClient())
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .build()
+    .baseUrl(baseUrl)
+    .client(makeHttpClient())
+    .addConverterFactory(GsonConverterFactory.create(gson))
+    .build()
 
 private fun makeHttpClient() = OkHttpClient.Builder()
-        .connectTimeout(60, TimeUnit.SECONDS)
-        .readTimeout(60, TimeUnit.SECONDS)
-        .addInterceptor(loggingInterceptor())
-        .addInterceptor(headersInterceptor())
-        .build()
+    .connectTimeout(60, TimeUnit.SECONDS)
+    .readTimeout(60, TimeUnit.SECONDS)
+    .addInterceptor(loggingInterceptor())
+    .addInterceptor(headersInterceptor())
+    .build()
 
 fun headersInterceptor() = Interceptor { chain ->
     chain.proceed(
-            chain.request().newBuilder()
-                    .addHeader("Accept", "application/json")
-                    .addHeader("Accept-Language", "en")
-                    .addHeader("Content-Type", "application/json")
-                    .build()
+        chain.request().newBuilder()
+            .addHeader("Accept", "application/json")
+            .addHeader("Accept-Language", "en")
+            .addHeader("Content-Type", "application/json")
+            .build()
     )
 }
 

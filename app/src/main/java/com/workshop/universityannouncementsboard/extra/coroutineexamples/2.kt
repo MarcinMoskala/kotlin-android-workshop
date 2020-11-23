@@ -11,7 +11,7 @@ import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.CoroutineContext
 
 fun main() = runBlocking<Unit> {
-    val context: CoroutineContext = CoroutineName("AAA") + CoroutineName("BBB") + Job() + CoroutineExceptionHandler({coroutineContext, throwable ->  })
+    val context: CoroutineContext = CoroutineName("AAA") + CoroutineName("BBB") + Job() + CoroutineExceptionHandler({ coroutineContext, throwable -> })
     val comp: CoroutineName.Key = CoroutineName
     val nameCtx = context[comp]
     print(nameCtx?.name)

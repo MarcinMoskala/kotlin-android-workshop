@@ -13,8 +13,8 @@ class AnnouncementsRepositoryImpl(private val studentsRepository: StudentsReposi
     override suspend fun getAnnouncements(): Response<List<Announcement>, Throwable> {
         try {
             val announcements = AnnouncementsList.getAnnouncements(
-                    passingStudentsListText = makePassingStudentsListText(),
-                    bestStudentsListText = makeBestStudentsList()
+                passingStudentsListText = makePassingStudentsListText(),
+                bestStudentsListText = makeBestStudentsList()
             )
             return Success(announcements)
         } catch (e: Throwable) {
