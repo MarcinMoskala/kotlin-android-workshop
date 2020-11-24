@@ -37,9 +37,9 @@ class FunctionalTest {
     }
 
     fun testFunctions(obj: FunctionsFunctional) {
-        assertEquals(3, obj.add(1, 2))
-        assertEquals(6, obj.triple(2))
-        assertEquals("BBB", obj.longestOf("AA", "BBB", "CC"))
-        assertEquals("AA", obj.longestOf("AA", "B", "C"))
+        assertEquals(3, (obj.add as (Int, Int)->Int)(1, 2))
+        assertEquals(6, (obj.triple as (Int)->Int)(2))
+        assertEquals("BBB", (obj.longestOf as (String, String, String)->String)("AA", "BBB", "CC"))
+        assertEquals("AA", (obj.longestOf as (String, String, String)->String)("AA", "B", "C"))
     }
 }

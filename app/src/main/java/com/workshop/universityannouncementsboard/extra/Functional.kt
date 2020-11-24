@@ -15,24 +15,10 @@ class FunctionsClassic {
 }
 
 interface FunctionsFunctional {
-    val add: (Int, Int) -> Int
-    val printNum: (Int) -> Unit
-    val triple: (Int) -> Int
-    val longestOf: (String, String, String) -> String
-}
-
-class LambdaFunctionalTypeSpecified : FunctionsFunctional {
-    override val add: (Int, Int) -> Int = { num1, num2 -> num1 + num2 }
-    override val printNum = TODO()
-    override val triple = TODO()
-    override val longestOf = TODO()
-}
-
-class LambdaFunctionalTypeInferred : FunctionsFunctional {
-    override val add = { num1: Int, num2: Int -> num1 + num2 }
-    override val printNum = TODO()
-    override val triple = TODO()
-    override val longestOf = TODO()
+    val add: Any
+    val printNum: Any
+    val triple: Any
+    val longestOf: Any
 }
 
 class AnonymousFunctionalTypeSpecified : FunctionsFunctional {
@@ -44,6 +30,20 @@ class AnonymousFunctionalTypeSpecified : FunctionsFunctional {
 
 class AnonymousFunctionalTypeInferred : FunctionsFunctional {
     override val add = fun(num1: Int, num2: Int) = num1 + num2
+    override val printNum = TODO()
+    override val triple = TODO()
+    override val longestOf = TODO()
+}
+
+class LambdaFunctionalTypeSpecified : FunctionsFunctional {
+    override val add: (Int, Int) -> Int = { num1, num2 -> num1 + num2 }
+    override val printNum = TODO()
+    override val triple = TODO()
+    override val longestOf = TODO()
+}
+
+class LambdaFunctionalTypeInferred : FunctionsFunctional {
+    override val add = { num1: Int, num2: Int -> num1 + num2 }
     override val printNum = TODO()
     override val triple = TODO()
     override val longestOf = TODO()
