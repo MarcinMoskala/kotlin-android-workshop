@@ -1,8 +1,8 @@
 package com.workshop.universityannouncementsboard.model
 
-sealed class Response<out R, out E>
-class Success<out R>(val value: R) : Response<R, Nothing>()
-class Failure<out E>(val error: E) : Response<Nothing, E>()
+sealed class Response<R, E>
+class Success<R, E>(val value: R) : Response<R, E>()
+class Failure<R, E>(val error: E) : Response<R, E>()
 
 /* TODO:
 Change above declaration to let me use it this way:
