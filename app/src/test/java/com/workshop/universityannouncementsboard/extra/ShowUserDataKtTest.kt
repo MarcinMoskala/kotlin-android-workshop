@@ -21,7 +21,7 @@ class ShowUserDataTest {
         showUserData(repo, view)
 
         // then
-        assertEquals(listOf(User("Ben", listOf(Friend("some-friend-id-1")), Profile("Example description"))), view.printed)
+        assertEquals(listOf(UserData("Ben", listOf(Friend("some-friend-id-1")), Profile("Example description"))), view.printed)
     }
 
     @Test(timeout = 300)
@@ -75,10 +75,10 @@ class ShowUserDataTest {
     }
 
     class FakeUserDataView : UserDataView {
-        var printed = listOf<User>()
+        var printed = listOf<UserData>()
 
-        override fun show(user: User) {
-            printed = printed + user
+        override fun show(userData: UserData) {
+            printed = printed + userData
         }
     }
 }

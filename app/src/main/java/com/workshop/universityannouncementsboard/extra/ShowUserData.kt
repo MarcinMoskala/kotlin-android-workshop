@@ -19,10 +19,10 @@ interface UserDataRepository {
 }
 
 interface UserDataView {
-    fun show(user: User)
+    fun show(userData: UserData)
 }
 
-data class User(val name: String, val friends: List<Friend>, val profile: Profile)
+data class UserData(val name: String, val friends: List<Friend>, val profile: Profile)
 data class Friend(val id: String)
 data class Profile(val description: String)
 
@@ -48,7 +48,7 @@ class TestUserDataRepository : UserDataRepository {
 }
 
 class TestUserDataView : UserDataView {
-    override fun show(user: User) {
-        print(user)
+    override fun show(userData: UserData) {
+        print(userData)
     }
 }
