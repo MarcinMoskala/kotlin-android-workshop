@@ -9,11 +9,11 @@ import org.junit.Test
 import kotlin.test.assertTrue
 
 class BasePresenterTest {
-    private val FAKE_UI = newSingleThreadContext("UIThread") // Normally it will be Dispatchers.Main
+    private val UI = newSingleThreadContext("UIThread") // Normally it will be Dispatchers.Main
 
     @Before
     fun setUp() {
-        Dispatchers.setMain(FAKE_UI)
+        Dispatchers.setMain(UI)
     }
 
     class FakePresenter(
@@ -24,24 +24,24 @@ class BasePresenterTest {
         var cancelledJobs = 0
 
         fun onCreate() {
-//            launch {
-//                try {
-//                    delay(100)
-//                    jobInterceptor?.invoke()
-//                    delay(2000)
-//                } finally {
-//                    cancelledJobs += 1
-//                }
-//            }
-//            launch {
-//                try {
-//                    delay(100)
-//                    jobInterceptor?.invoke()
-//                    delay(2000)
-//                } finally {
-//                    cancelledJobs += 1
-//                }
-//            }
+            scope.launch {
+                try {
+                    delay(100)
+                    jobInterceptor?.invoke()
+                    delay(2000)
+                } finally {
+                    cancelledJobs += 1
+                }
+            }
+            scope.launch {
+                try {
+                    delay(100)
+                    jobInterceptor?.invoke()
+                    delay(2000)
+                } finally {
+                    cancelledJobs += 1
+                }
+            }
         }
     }
 
@@ -91,14 +91,14 @@ class BasePresenterTest {
         var cancelledJobs = 0
 
         fun onCreate() {
-//            launch {
-//                delay(100)
-//                throw Error()
-//            }
-//            launch {
-//                delay(200)
-//                onSecondAction()
-//            }
+            scope.launch {
+                delay(100)
+                throw Error()
+            }
+            scope.launch {
+                delay(200)
+                onSecondAction()
+            }
         }
     }
 
@@ -112,5 +112,4 @@ class BasePresenterTest {
         delay(300)
         assertTrue(called)
     }
-
 }
