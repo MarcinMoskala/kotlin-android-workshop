@@ -1,7 +1,7 @@
 package com.workshop.universityannouncementsboard.util
 
-import android.support.v7.widget.RecyclerView
 import android.view.*
+import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseRecyclerViewAdapter(
     val items: List<ItemAdapter>

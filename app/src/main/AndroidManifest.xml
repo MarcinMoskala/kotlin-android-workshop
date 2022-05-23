@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.workshop.universityannouncementsboard">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,8 +15,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".presentation.MainActivity"
-
-            android:label="@string/main_activity_label">
+            android:label="@string/main_activity_label"
+            tools:replace="android:appComponentFactory"
+            android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

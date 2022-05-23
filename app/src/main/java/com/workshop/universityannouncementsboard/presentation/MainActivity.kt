@@ -1,21 +1,19 @@
 package com.workshop.universityannouncementsboard.presentation
 
+import android.app.Activity
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.workshop.universityannouncementsboard.R
 import com.workshop.universityannouncementsboard.domain.MainPresenter
 import com.workshop.universityannouncementsboard.domain.MainView
 import com.workshop.universityannouncementsboard.model.Announcement
 import com.workshop.universityannouncementsboard.repositiories.AnnouncementsRepositoryImpl
 import com.workshop.universityannouncementsboard.repositiories.HardcodedStudentsRepository
-import com.workshop.universityannouncementsboard.repositiories.NetworkStudentRepositoryV2
-import com.workshop.universityannouncementsboard.util.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.properties.Delegates
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : Activity(), MainView {
 
     // TODO: Write property delegate that will bind it to visibility of R.id.progressView. Usage should look this way
     // override var loading: Boolean by bindToVisibility(R.id.progressView)
