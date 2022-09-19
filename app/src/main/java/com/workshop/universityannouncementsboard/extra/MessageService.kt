@@ -11,7 +11,7 @@ class MessageService(
     // Without result type (or returning `Unit`)
     // Function should get emails using `findEmailAddresses`
     // Then for each email, it should send emails using `messageSender` function `sendEmail`
-    // For iterate over emails, use
+    // To iterate over emails, use
     // for(email in emails) {
     //     ...
     // }
