@@ -35,6 +35,10 @@ class AnonymousFunctionalTypeInferred : FunctionsFunctional {
     override val longestOf = TODO()
 }
 
+// 1. Specify the type of properties in LambdaFunctionalTypeSpecified
+// 2. Define lambda expressions in LambdaFunctionalTypeSpecified
+// 3. Define lambda expressions in LambdaFunctionalTypeInferred
+
 class LambdaFunctionalTypeSpecified : FunctionsFunctional {
     override val add: (Int, Int) -> Int = { num1, num2 -> num1 + num2 }
     override val printNum = TODO()
