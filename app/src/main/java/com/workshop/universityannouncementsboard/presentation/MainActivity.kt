@@ -37,14 +37,23 @@ class MainActivity : Activity(), MainView {
         onActivityCreated()
     }
 
+    // Set listView layout manager to LinearLayoutManager
+    // Set swipeRefreshView on refresh listener to call presenter onRefresh
+    // Call presenter onCreate
     fun onActivityCreated() {
         // TODO
     }
 
+    // showAnnouncements should set listView adapter to AnnouncementsListAdapter.
+    // Items should be first TitleItemAdapter with text “Announcements”, and then
+    // announcements AnnouncementItemAdapter for each announcement.
     override fun showAnnouncements(announcements: List<Announcement>) {
         // TODO
     }
 
+    // showError should check if listView adapter is set. If it is not then it should
+    // set it to AnnouncementsListAdapter with a single item of type TitleItemAdapter
+    // with the text "Keep refreshing".
     override fun showError(error: Throwable) {
         // TODO
     }
