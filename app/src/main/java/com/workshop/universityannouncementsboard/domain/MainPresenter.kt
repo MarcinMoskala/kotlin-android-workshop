@@ -17,11 +17,11 @@ class MainPresenter(
     private val announcementsRepository: AnnouncementsRepository
 ) : BasePresenter() {
 
-    fun onCreate() = runBlocking {
+    fun onCreate(): Unit = runBlocking {
         // TODO
     }
 
-    fun onRefresh() = runBlocking {
+    fun onRefresh(): Unit = runBlocking {
         // TODO
     }
 }
