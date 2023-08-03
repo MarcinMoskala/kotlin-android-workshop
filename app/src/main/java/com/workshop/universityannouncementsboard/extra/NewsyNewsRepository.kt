@@ -5,7 +5,7 @@ import kotlin.time.Duration.Companion.seconds
 
 class NewsyNewsRepository(
     private val newsFactory: NewsFactory
-) {
+): NewsRepository {
     private val newsyApi = Newsy()
 
     init {
@@ -14,18 +14,23 @@ class NewsyNewsRepository(
         newsyApi.refreshTime = 1.seconds
     }
 
-    suspend fun getNewsDetails(newsId: Int): NewsDetails? {
+    override suspend fun getNewsDetails(newsId: Int): NewsDetails? {
         val news = newsyApi.getNews(newsId) ?: return null
         return newsFactory.produceNews(news)
     }
 
-    suspend fun updateNews(newsUpdate: NewsUpdate): NewsDetails? {
+    override suspend fun updateNews(newsUpdate: NewsUpdate): NewsDetails? {
         val newsyUpdate = newsFactory.produceNewsyUpdate(newsUpdate)
         val id = newsyApi.update(newsyUpdate) ?: return null
         newsyApi.awaitAllUpdates()
         val news = newsyApi.getNews(id) ?: return null
         return newsFactory.produceNews(news)
     }
+}
+
+interface NewsRepository {
+    suspend fun getNewsDetails(newsId: Int): NewsDetails?
+    suspend fun updateNews(newsUpdate: NewsUpdate): NewsDetails?
 }
 
 class NewsDetails
